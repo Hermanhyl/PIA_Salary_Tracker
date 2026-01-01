@@ -126,6 +126,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     setCurrentFileName(null);
     setHasFileHandle(false);
     setHasUnsavedChanges(false);
+    setCurrentYear(new Date().getFullYear()); // Reset to current year
     clearFileHandle();
   }, []);
 

@@ -81,19 +81,21 @@ export function DashboardHeader() {
             )}
           </div>
           <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
-            {/* New File Button */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleNew}
-              className="gap-1.5"
-              title={language === "de" ? "Neue Datei" : "New File"}
-            >
-              <FilePlus className="h-4 w-4" />
-              <span className="hidden sm:inline text-sm">
-                {language === "de" ? "Neu" : "New"}
-              </span>
-            </Button>
+            {/* New File Button - Only show when a file is loaded */}
+            {(currentFileName || hasFileHandle) && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleNew}
+                className="gap-1.5"
+                title={language === "de" ? "Neue Datei" : "New File"}
+              >
+                <FilePlus className="h-4 w-4" />
+                <span className="hidden sm:inline text-sm">
+                  {language === "de" ? "Neu" : "New"}
+                </span>
+              </Button>
+            )}
 
             {/* Load Excel Button */}
             <Button
