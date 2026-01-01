@@ -1,14 +1,41 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Settings, Languages, Save, FolderOpen, FilePlus } from "lucide-react";
+import { Settings, Languages, Save, FolderOpen, FilePlus, Moon, Sun } from "lucide-react";
 import { useLanguage } from "@/lib/language-context";
 import { useData } from "@/lib/data-context";
 
 export function DashboardHeader() {
   const { language, setLanguage, t } = useLanguage();
   const { hasUnsavedChanges, saveToFile, loadFromFile, newFile, currentFileName, hasFileHandle } = useData();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Initialize dark mode from localStorage or system preference
+  useEffect(() => {
+    const stored = localStorage.getItem("darkMode");
+    if (stored !== null) {
+      setIsDarkMode(stored === "true");
+    } else {
+      // Check system preference
+      setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }, []);
+
+  // Apply dark mode class to document
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("darkMode", isDarkMode.toString());
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   const toggleLanguage = () => {
     setLanguage(language === "de" ? "en" : "de");
@@ -110,6 +137,24 @@ export function DashboardHeader() {
               <span className="text-sm font-medium">
                 {language.toUpperCase()}
               </span>
+            </Button>
+
+            {/* Dark Mode Toggle */}
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={toggleDarkMode}
+              title={
+                language === "de"
+                  ? (isDarkMode ? "Heller Modus" : "Dunkler Modus")
+                  : (isDarkMode ? "Light Mode" : "Dark Mode")
+              }
+            >
+              {isDarkMode ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
             </Button>
 
             <Link href="/settings">
