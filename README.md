@@ -16,7 +16,7 @@ A modern web application for tracking monthly income with automatic tax and insu
 - **Local Storage**: All data stored locally - no cloud account required
 - **Bilingual Support**: German and English interface
 - **Responsive Design**: Works on desktop, tablet, and mobile devices
-- **Dark Mode Support**: Automatic theme switching
+- **Dark Mode Support**: Toggle between light and dark themes
 - **Duplicate Protection**: Warnings when adding entries for months that already have data
 
 ## Tech Stack
@@ -95,6 +95,14 @@ Open **http://localhost:4500** in your browser.
 ### Switching Language
 
 Click the language button (DE/EN) in the header to switch between German and English.
+
+### Switching Theme
+
+Click the moon/sun icon in the header to toggle between light and dark mode. Your preference is saved automatically.
+
+### Starting a New File
+
+When you have a file loaded, a **"Neu"** (New) button appears in the header. Click it to start fresh with a blank file. This clears all current data without affecting your saved Excel file.
 
 ## Excel File Structure
 
